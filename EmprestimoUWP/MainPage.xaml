@@ -11,22 +11,27 @@
         <Pivot Title="Loja de Veículos">
             <PivotItem Header="Inserir Emprestimo">
                 <Grid>
-                    <CalendarDatePicker HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="50" Width="316"/>
-                    <TextBox x:Name="txtDesc" HorizontalAlignment="Left" Margin="10,47,0,0" TextWrapping="Wrap" Text="Descrição" VerticalAlignment="Top" Width="150"/>
-                    <ComboBox x:Name="cbContato" HorizontalAlignment="Left" Margin="165,47,0,0" VerticalAlignment="Top" Width="161"/>
-                    <Button x:Name="btnInsEmp" Content="Inserir" HorizontalAlignment="Left" Margin="261,84,0,0" VerticalAlignment="Top"/>
+                    <CalendarDatePicker x:Name="dataEmpre" HorizontalAlignment="Left" Margin="166,107,0,0" VerticalAlignment="Top" Height="50" Width="160"/>
+                    <TextBox x:Name="txtDesc" HorizontalAlignment="Left" Margin="166,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Height="55"/>
+                    <ComboBox x:Name="cbContato" HorizontalAlignment="Left" Margin="166,70,0,0" VerticalAlignment="Top" Width="160"/>
+                    <Button x:Name="btnInsEmp" Content="Inserir" HorizontalAlignment="Left" Margin="218,190,0,0" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Descrição do objeto emprestado: " VerticalAlignment="Top" Width="151"/>
+                    <CalendarDatePicker x:Name="dataDevo" HorizontalAlignment="Left" Margin="166,144,0,0" VerticalAlignment="Top" Width="160"/>
+                    <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,62,0,0" TextWrapping="Wrap" Text="Quem pegou emprestado:" VerticalAlignment="Top" Width="151"/>
+                    <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,112,0,0" TextWrapping="Wrap" Text="Data do empréstimo:" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,137,0,0" TextWrapping="Wrap" Text="Data previsão de devolução:" VerticalAlignment="Top" Width="151"/>
 
                 </Grid>
             </PivotItem>
             <PivotItem Header="Listar Emprestados">
-                <ListView x:Name="lvVendidos" HorizontalAlignment="Left" Height="525" Margin="10,10,0,0" VerticalAlignment="Top" Width="316">
+                <ListView x:Name="lvEmprestados" HorizontalAlignment="Left" Height="525" Margin="10,10,0,0" VerticalAlignment="Top" Width="316">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
                                 <TextBlock FontSize="12">
-                                        <Run Text="{Binding Id}" />
+                                        <Run Text="{Binding Descricao}" />
                                         <Run Text=" - " /> 
-                                        <Run Text="{Binding Modelo}" />
+                                        <Run Text="{Binding NomeContato}" />
                                         <Run Text=" - " /> 
                                         <Run Text="{Binding Ano}" />
                                         <Run Text=" - " /> 
