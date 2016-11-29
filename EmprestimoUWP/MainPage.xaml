@@ -14,7 +14,7 @@
                     <CalendarDatePicker x:Name="dataEmpre" HorizontalAlignment="Left" Margin="166,107,0,0" VerticalAlignment="Top" Height="50" Width="160"/>
                     <TextBox x:Name="txtDesc" HorizontalAlignment="Left" Margin="166,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Height="55"/>
                     <ComboBox x:Name="cbContato" HorizontalAlignment="Left" Margin="166,70,0,0" VerticalAlignment="Top" Width="160"/>
-                    <Button x:Name="btnInsEmp" Content="Inserir" HorizontalAlignment="Left" Margin="218,190,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="btnInsEmp" Content="Inserir" HorizontalAlignment="Left" Margin="166,181,0,0" VerticalAlignment="Top" Width="160" Click="btnInsEmp_Click"/>
                     <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Descrição do objeto emprestado: " VerticalAlignment="Top" Width="151"/>
                     <CalendarDatePicker x:Name="dataDevo" HorizontalAlignment="Left" Margin="166,144,0,0" VerticalAlignment="Top" Width="160"/>
                     <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,62,0,0" TextWrapping="Wrap" Text="Quem pegou emprestado:" VerticalAlignment="Top" Width="151"/>
@@ -24,69 +24,71 @@
                 </Grid>
             </PivotItem>
             <PivotItem Header="Listar Emprestados">
-                <ListView x:Name="lvEmprestados" HorizontalAlignment="Left" Height="525" Margin="10,10,0,0" VerticalAlignment="Top" Width="316">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock FontSize="12">
+                <Grid>
+                    <ListView x:Name="lvEmprestados" HorizontalAlignment="Left" Height="480" Margin="10,55,0,0" VerticalAlignment="Top" Width="316">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock FontSize="12">
                                         <Run Text="{Binding Descricao}" />
                                         <Run Text=" - " /> 
-                                        <Run Text="{Binding NomeContato}" />
+                                        <Run Text="{Binding Contato.Nome}" />
                                         <Run Text=" - " /> 
-                                        <Run Text="{Binding Ano}" />
+                                        <Run Text="{Binding DataEmprestimo}" />
                                         <Run Text=" - " /> 
-                                        <Run Text="{Binding Preco}" />
+                                        <Run Text="{Binding DataDevolucao}" />
                                         <Run Text=" - Vendido: " /> 
-                                        <Run Text="{Binding Vendido}" />
+                                        <Run Text="{Binding Devolvido}" />
                                         <Run Text=" - " /> 
-                                        <Run Text="{Binding Fab.Descricao}" />
-                                </TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                        <Run Text="{Binding }" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button x:Name="btnDevolvido" Content="Devolvido" HorizontalAlignment="Left" Margin="188,10,0,0" VerticalAlignment="Top" Click="btnDevolvido_Click"/>
+                    <Button x:Name="btnNDevolvido" Content="Xexado" HorizontalAlignment="Left" Margin="58,10,0,0" VerticalAlignment="Top" Click="btnNDevolvido_Click"/>
+                </Grid>
             </PivotItem>
             <PivotItem Header="Inserir Contato">
-                <!--<Grid>
-                    <TextBox x:Name="txtIdFab" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Id" VerticalAlignment="Top" Width="46"/>
-                    <TextBox x:Name="txtDescFab" HorizontalAlignment="Left" Margin="79,10,0,0" TextWrapping="Wrap" Text="Descricao" VerticalAlignment="Top" Width="107"/>
-                    <Button x:Name="btnInserirFab" Content="Inserir" HorizontalAlignment="Left" Margin="191,10,0,0" VerticalAlignment="Top" Click="btnInserirFab_Click"/>
-                    <ListView x:Name="lvFab" HorizontalAlignment="Left" Height="488" Margin="10,47,0,0" VerticalAlignment="Top" Width="315">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock FontSize="12">
-                                        <Run Text="{Binding Id}" />
-                                        <Run Text=" - " /> 
-                                        <Run Text="{Binding Descricao}" />
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <Button x:Name="btnListarFab" Content="Listar" HorizontalAlignment="Left" Margin="257,10,0,0" VerticalAlignment="Top" Click="btnListarFab_Click"/>
-                </Grid>-->
+                <Grid>
+                    <TextBox x:Name="txtNome" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top" Width="316"/>
+                    <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="10,47,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="316"/>
+                    <TextBox x:Name="txtTel" HorizontalAlignment="Left" Margin="10,84,0,0" TextWrapping="Wrap" Text="Telefone" VerticalAlignment="Top" Width="168"/>
+                    <Button x:Name="btnInserirCont" Content="Inserir" HorizontalAlignment="Left" Margin="183,84,0,0" VerticalAlignment="Top" Width="143" Click="btnInserirCont_Click"/>
+
+                </Grid>
             </PivotItem>
-            <PivotItem Header="Editar Contato">
-                <!--<Grid>
-                    <TextBox x:Name="txtIdFab" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Id" VerticalAlignment="Top" Width="46"/>
-                    <TextBox x:Name="txtDescFab" HorizontalAlignment="Left" Margin="79,10,0,0" TextWrapping="Wrap" Text="Descricao" VerticalAlignment="Top" Width="107"/>
-                    <Button x:Name="btnInserirFab" Content="Inserir" HorizontalAlignment="Left" Margin="191,10,0,0" VerticalAlignment="Top" Click="btnInserirFab_Click"/>
-                    <ListView x:Name="lvFab" HorizontalAlignment="Left" Height="488" Margin="10,47,0,0" VerticalAlignment="Top" Width="315">
+            <PivotItem Header="Contatos">
+                <Grid>
+                    <ListView x:Name="lvContatos" HorizontalAlignment="Left" Height="480" Margin="10,55,0,0" VerticalAlignment="Top" Width="316">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
                                     <TextBlock FontSize="12">
-                                        <Run Text="{Binding Id}" />
+                                        <Run Text="{Binding Nome}" />
                                         <Run Text=" - " /> 
-                                        <Run Text="{Binding Descricao}" />
+                                        <Run Text="{Binding Email}" />
+                                        <Run Text=" - " /> 
+                                        <Run Text="{Binding Telefone}" />
                                     </TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Button x:Name="btnListarFab" Content="Listar" HorizontalAlignment="Left" Margin="257,10,0,0" VerticalAlignment="Top" Click="btnListarFab_Click"/>
-                </Grid>-->
+                    <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="188,10,0,0" VerticalAlignment="Top" Click="btnEditar_Click"/>
+                    <Button x:Name="btnDeletar" Content="Deletar" HorizontalAlignment="Left" Margin="58,10,0,0" VerticalAlignment="Top" Click="btnDeletar_Click"/>
+                </Grid>
+            </PivotItem>
+            <PivotItem Header="Editar Contato" IsEnabled="False">
+                <Grid>
+                    
+                    <TextBox x:Name="txtEditNome" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top" Width="316"/>
+                    <TextBox x:Name="txtEditEmail" HorizontalAlignment="Left" Margin="10,47,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="316"/>
+                    <TextBox x:Name="txtEditTel" HorizontalAlignment="Left" Margin="10,84,0,0" TextWrapping="Wrap" Text="Telefone" VerticalAlignment="Top" Width="168"/>
+                    <Button x:Name="btnEditCont" Content="Atualizar" HorizontalAlignment="Left" Margin="183,84,0,0" VerticalAlignment="Top" Width="143" Click="btnEditCont_Click"/>
+                    
+                 </Grid>
             </PivotItem>
         </Pivot>
     </Grid>

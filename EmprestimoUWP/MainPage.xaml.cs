@@ -26,5 +26,41 @@ namespace EmprestimoUWP
         {
             this.InitializeComponent();
         }
+
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+            
+            
+        }
+
+        private void btnInsEmp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnNDevolvido_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDevolvido_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnInserirCont_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeletar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEditCont_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
