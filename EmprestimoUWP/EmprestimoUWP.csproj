@@ -99,9 +99,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20161130152911_AppEmprestimo.cs" />
-    <Compile Include="Migrations\20161130152911_AppEmprestimo.designer.cs">
-      <DependentUpon>20161130152911_AppEmprestimo.cs</DependentUpon>
+    <Compile Include="Migrations\20161130154903_AppEmprest2.cs" />
+    <Compile Include="Migrations\20161130154903_AppEmprest2.designer.cs">
+      <DependentUpon>20161130154903_AppEmprest2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AppEmprestimoModelSnapshot.cs" />
     <Compile Include="Models\AppEmprestimo.cs" />

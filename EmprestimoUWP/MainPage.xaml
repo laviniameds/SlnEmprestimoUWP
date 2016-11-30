@@ -35,11 +35,14 @@
                                         <Run Text="{Binding Contato.Nome}" />
                                         <Run Text=" - " /> 
                                         <Run Text="{Binding DataEmprestimo}" />
-                                        <Run Text=" - " /> 
+                                        <Run Text="\n" />  
                                         <Run Text="{Binding DataDevolucao}" />
                                         <Run Text=" - Devolvido: " /> 
                                         <Run Text="{Binding Devolvido}" />
-                                        <Run Text=" - " /> 
+                                        <Run Text="\n" /> 
+                                        <Run Text="{Binding Contato.Email}" />
+                                        <Run Text=" - " />
+                                        <Run Text="{Binding Contato.Telefone}" />
                                     </TextBlock>
                                 </StackPanel>
                             </DataTemplate>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EmprestimoUWP.Migrations
 {
-    public partial class AppEmprestimo : Migration
+    public partial class AppEmprest2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

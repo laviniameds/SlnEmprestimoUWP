@@ -13,7 +13,7 @@ namespace EmprestimoUWP.Models
         public DbSet<Emprestimo> Emprestimos { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=AppEmprestimo.db");
+            optionsBuilder.UseSqlite("Filename=AppEmprestimo2.db");
         }
     }
 }

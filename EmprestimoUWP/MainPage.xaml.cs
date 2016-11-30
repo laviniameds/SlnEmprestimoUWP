@@ -27,8 +27,10 @@ namespace EmprestimoUWP
         {
             this.InitializeComponent();
             ListarContatos();
+            ListarEmprestados();
             dataEmpre.Date = DateTime.Now;
             dataDevo.Date = DateTime.Now;
+            PopularCB();
         }
 
         private void ListarContatos()
@@ -49,7 +51,7 @@ namespace EmprestimoUWP
                 lvEmprestados.ItemsSource = null;
                 foreach (Emprestimo emp in db.Emprestimos)
                 {
-                    emp.Contato = db.Contatos.Where(k => k.Id == Convert.ToInt32(emp.Contato.Id)).Single();
+                    emp.Contato = db.Contatos.Where(k => k.Id == Convert.ToInt32(emp.IdContato)).Single();
                     db.Emprestimos.Update(emp);
                 }
                 db.SaveChanges();
@@ -82,13 +84,17 @@ namespace EmprestimoUWP
         {
             AppEmprestimo db = new AppEmprestimo();
             Contato contato = db.Contatos.Where(k => k.Id == Convert.ToInt32(cbContato.SelectedValue)).Single();
+            DateTimeOffset sourceTime1 = (DateTimeOffset)dataEmpre.Date;
+            DateTime DataEmpre = sourceTime1.DateTime;
+            DateTimeOffset sourceTime2 = (DateTimeOffset)dataDevo.Date;
+            DateTime DataDevo = sourceTime2.DateTime;
             Emprestimo emp = new Emprestimo
             {
                 Descricao = txtDesc.Text,
                 Contato = contato,
                 IdContato = contato.Id,
-                DataEmprestimo = Convert.ToDateTime(dataEmpre.Date),
-                DataPrevDev = Convert.ToDateTime(dataDevo.Date),
+                DataEmprestimo = DataEmpre,
+                DataPrevDev = DataDevo,
                 Devolvido = false
             };
             db.Emprestimos.Add(emp);
@@ -118,6 +124,7 @@ namespace EmprestimoUWP
             db.Contatos.Add(c);
             db.SaveChanges();
             ListarContatos();
+            PopularCB();
         }
 
         private void btnDeletar_Click(object sender, RoutedEventArgs e)
@@ -149,6 +156,7 @@ namespace EmprestimoUWP
             txtEditEmail.Text = "";
             txtEditTel.Text = "";
             pItemEdit.IsEnabled = false;
+            PopularCB();
         }
     }
 }
