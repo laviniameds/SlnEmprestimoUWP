@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Title="Loja de Veículos">
+        <Pivot x:Name="pivotEmp" Title="App de Emprestimos">
             <PivotItem Header="Inserir Emprestimo">
                 <Grid>
                     <CalendarDatePicker x:Name="dataEmpre" HorizontalAlignment="Left" Margin="166,107,0,0" VerticalAlignment="Top" Height="50" Width="160"/>
@@ -80,7 +80,7 @@
                     <Button x:Name="btnDeletar" Content="Deletar" HorizontalAlignment="Left" Margin="58,10,0,0" VerticalAlignment="Top" Click="btnDeletar_Click"/>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="Editar Contato" IsEnabled="False">
+            <PivotItem x:Name="pItemEdit" Header="Editar Contato" IsEnabled="False">
                 <Grid>
                     <TextBox x:Name="txtEditNome" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top" Width="316"/>
                     <TextBox x:Name="txtEditEmail" HorizontalAlignment="Left" Margin="10,47,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="316"/>

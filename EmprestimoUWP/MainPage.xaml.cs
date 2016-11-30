@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmprestimoUWP.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,12 +26,27 @@ namespace EmprestimoUWP
         public MainPage()
         {
             this.InitializeComponent();
+            ListarContatos();
+        }
+
+        private void ListarContatos()
+        {
+            AppEmprestimo db = new AppEmprestimo();
+            if (db.Contatos.Count() != 0)
+            {
+                lvContatos.ItemsSource = null;
+                lvContatos.ItemsSource = db.Contatos.ToList();
+            }
         }
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-            
-            
+            pItemEdit.IsEnabled = true;
+            pivotEmp.SelectedItem = pItemEdit;
+            Contato obj = (Contato)lvContatos.SelectedItem;
+            txtEditNome.Text = obj.Nome;
+            txtEditEmail.Text = obj.Email;
+            txtEditTel.Text = obj.Telefone;
         }
 
         private void btnInsEmp_Click(object sender, RoutedEventArgs e)
@@ -50,17 +66,47 @@ namespace EmprestimoUWP
 
         private void btnInserirCont_Click(object sender, RoutedEventArgs e)
         {
-
+            AppEmprestimo db = new AppEmprestimo();
+            Contato c = new Contato
+            {
+                Nome = txtNome.Text,
+                Email = txtEmail.Text,
+                Telefone = txtTel.Text
+            };
+            db.Contatos.Add(c);
+            db.SaveChanges();
+            ListarContatos();
         }
 
         private void btnDeletar_Click(object sender, RoutedEventArgs e)
         {
-
+            AppEmprestimo db = new AppEmprestimo();
+            Contato obj = (Contato)lvContatos.SelectedItem;
+            db.Contatos.Remove(obj);
+            db.SaveChanges();
+            ListarContatos();
         }
 
         private void btnEditCont_Click(object sender, RoutedEventArgs e)
         {
+            Contato obj = (Contato)lvContatos.SelectedItem;
+            AppEmprestimo db = new AppEmprestimo();
 
+            Contato c = new Contato
+            {
+                Id = obj.Id,
+                Nome = txtEditNome.Text,
+                Email = txtEditEmail.Text,
+                Telefone = txtEditTel.Text
+            };
+            db.Contatos.Update(c);
+            db.SaveChanges();
+            ListarContatos();
+
+            txtEditNome.Text = "";
+            txtEditEmail.Text = "";
+            txtEditTel.Text = "";
+            pItemEdit.IsEnabled = false;
         }
     }
 }
