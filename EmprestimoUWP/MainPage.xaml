@@ -37,10 +37,9 @@
                                         <Run Text="{Binding DataEmprestimo}" />
                                         <Run Text=" - " /> 
                                         <Run Text="{Binding DataDevolucao}" />
-                                        <Run Text=" - Vendido: " /> 
+                                        <Run Text=" - Devolvido: " /> 
                                         <Run Text="{Binding Devolvido}" />
                                         <Run Text=" - " /> 
-                                        <Run Text="{Binding }" />
                                     </TextBlock>
                                 </StackPanel>
                             </DataTemplate>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EmprestimoUWP.Migrations
 {
-    public partial class EmprestimoMigration : Migration
+    public partial class AppEmprestimo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +33,8 @@ namespace EmprestimoUWP.Migrations
                     DataEmprestimo = table.Column<DateTime>(nullable: false),
                     DataPrevDev = table.Column<DateTime>(nullable: false),
                     Descricao = table.Column<string>(nullable: true),
-                    Devolvido = table.Column<bool>(nullable: false)
+                    Devolvido = table.Column<bool>(nullable: false),
+                    IdContato = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

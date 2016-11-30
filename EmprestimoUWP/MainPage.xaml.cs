@@ -27,6 +27,8 @@ namespace EmprestimoUWP
         {
             this.InitializeComponent();
             ListarContatos();
+            dataEmpre.Date = DateTime.Now;
+            dataDevo.Date = DateTime.Now;
         }
 
         private void ListarContatos()
@@ -36,6 +38,33 @@ namespace EmprestimoUWP
             {
                 lvContatos.ItemsSource = null;
                 lvContatos.ItemsSource = db.Contatos.ToList();
+            }
+        }
+
+        private void ListarEmprestados()
+        {
+            AppEmprestimo db = new AppEmprestimo();
+            if (db.Emprestimos.Count() != 0)
+            {
+                lvEmprestados.ItemsSource = null;
+                foreach (Emprestimo emp in db.Emprestimos)
+                {
+                    emp.Contato = db.Contatos.Where(k => k.Id == Convert.ToInt32(emp.Contato.Id)).Single();
+                    db.Emprestimos.Update(emp);
+                }
+                db.SaveChanges();
+                lvEmprestados.ItemsSource = db.Emprestimos.ToList();
+            }
+        }
+
+        private void PopularCB()
+        {
+            AppEmprestimo db = new AppEmprestimo();
+            if (db.Contatos.Count() != 0)
+            {
+                cbContato.ItemsSource = db.Contatos.ToList();
+                cbContato.SelectedValuePath = "Id";
+                cbContato.DisplayMemberPath = "Nome";
             }
         }
 
@@ -51,7 +80,20 @@ namespace EmprestimoUWP
 
         private void btnInsEmp_Click(object sender, RoutedEventArgs e)
         {
-
+            AppEmprestimo db = new AppEmprestimo();
+            Contato contato = db.Contatos.Where(k => k.Id == Convert.ToInt32(cbContato.SelectedValue)).Single();
+            Emprestimo emp = new Emprestimo
+            {
+                Descricao = txtDesc.Text,
+                Contato = contato,
+                IdContato = contato.Id,
+                DataEmprestimo = Convert.ToDateTime(dataEmpre.Date),
+                DataPrevDev = Convert.ToDateTime(dataDevo.Date),
+                Devolvido = false
+            };
+            db.Emprestimos.Add(emp);
+            db.SaveChanges();
+            ListarEmprestados();
         }
 
         private void btnNDevolvido_Click(object sender, RoutedEventArgs e)

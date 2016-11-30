@@ -9,6 +9,7 @@ namespace EmprestimoUWP.Models
     public class Emprestimo
     {
         public int Id { get; set; }
+        public int IdContato { get; set; }
         public string Descricao { get; set; }
         public Contato Contato { get; set; }
         public DateTime DataEmprestimo { get; set; }

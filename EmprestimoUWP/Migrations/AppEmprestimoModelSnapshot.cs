@@ -46,6 +46,8 @@ namespace EmprestimoUWP.Migrations
 
                     b.Property<bool>("Devolvido");
 
+                    b.Property<int>("IdContato");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ContatoId");

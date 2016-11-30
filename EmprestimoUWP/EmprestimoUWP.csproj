@@ -99,9 +99,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20161130005524_EmprestimoMigration.cs" />
-    <Compile Include="Migrations\20161130005524_EmprestimoMigration.designer.cs">
-      <DependentUpon>20161130005524_EmprestimoMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20161130152911_AppEmprestimo.cs" />
+    <Compile Include="Migrations\20161130152911_AppEmprestimo.designer.cs">
+      <DependentUpon>20161130152911_AppEmprestimo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AppEmprestimoModelSnapshot.cs" />
     <Compile Include="Models\AppEmprestimo.cs" />
@@ -135,6 +135,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
