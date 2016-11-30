@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EmprestimoUWP.Migrations
 {
-    public partial class AppEmprest2 : Migration
+    public partial class AppEmprestimo2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,7 @@ namespace EmprestimoUWP.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ContatoId = table.Column<int>(nullable: true),
+                    DataDevolucao = table.Column<DateTime>(nullable: false),
                     DataEmprestimo = table.Column<DateTime>(nullable: false),
                     DataPrevDev = table.Column<DateTime>(nullable: false),
                     Descricao = table.Column<string>(nullable: true),

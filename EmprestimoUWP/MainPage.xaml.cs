@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -80,7 +81,7 @@ namespace EmprestimoUWP
             txtEditTel.Text = obj.Telefone;
         }
 
-        private void btnInsEmp_Click(object sender, RoutedEventArgs e)
+        private async void btnInsEmp_Click(object sender, RoutedEventArgs e)
         {
             AppEmprestimo db = new AppEmprestimo();
             Contato contato = db.Contatos.Where(k => k.Id == Convert.ToInt32(cbContato.SelectedValue)).Single();
@@ -95,11 +96,20 @@ namespace EmprestimoUWP
                 IdContato = contato.Id,
                 DataEmprestimo = DataEmpre,
                 DataPrevDev = DataDevo,
+                DataDevolucao = new DateTime(),
                 Devolvido = false
             };
-            db.Emprestimos.Add(emp);
-            db.SaveChanges();
-            ListarEmprestados();
+            if (emp.DataPrevDev >= emp.DataEmprestimo)
+            {
+                db.Emprestimos.Add(emp);
+                db.SaveChanges();
+                ListarEmprestados();
+            }
+            else
+            {
+                MessageDialog dialog = new MessageDialog("Selecione uma data de devolução válida!");
+                await dialog.ShowAsync();
+            }
         }
 
         private void btnNDevolvido_Click(object sender, RoutedEventArgs e)
@@ -107,9 +117,65 @@ namespace EmprestimoUWP
 
         }
 
-        private void btnDevolvido_Click(object sender, RoutedEventArgs e)
+        private async void btnDevolvido_Click(object sender, RoutedEventArgs e)
         {
+            Emprestimo obj = (Emprestimo)lvEmprestados.SelectedItem;
+            if (obj.Devolvido == false)
+            {
+                if (DateTime.Now >= obj.DataPrevDev)
+                {
+                    AppEmprestimo db = new AppEmprestimo();
+                    Emprestimo emp = new Emprestimo
+                    {
+                        Id = obj.Id,
+                        IdContato = obj.IdContato,
+                        Descricao = obj.Descricao,
+                        Contato = obj.Contato,
+                        DataEmprestimo = obj.DataEmprestimo,
+                        DataPrevDev = obj.DataPrevDev,
+                        Devolvido = true,
+                        DataDevolucao = DateTime.Now
+                    };
+                    db.Emprestimos.Update(emp);
+                    db.SaveChanges();
+                    ListarEmprestados();
+                }
+                else
+                {
+                    MessageDialog dialog = new MessageDialog(
+                        "O prazo para entrega ainda não foi atingido! \n Deseja marcar como 'devolvido' mesmo assim?"
+                        );
+                    dialog.Commands.Add(new UICommand("Sim") { Id = 0 });
+                    dialog.Commands.Add(new UICommand("Não") { Id = 1 });
+                    dialog.DefaultCommandIndex = 0;
+                    dialog.CancelCommandIndex = 1;
 
+                    var result = await dialog.ShowAsync();
+                    if ((int)result.Id == 0)
+                    {
+                        AppEmprestimo db = new AppEmprestimo();
+                        Emprestimo emp = new Emprestimo
+                        {
+                            Id = obj.Id,
+                            IdContato = obj.IdContato,
+                            Descricao = obj.Descricao,
+                            Contato = obj.Contato,
+                            DataEmprestimo = obj.DataEmprestimo,
+                            DataPrevDev = obj.DataPrevDev,
+                            Devolvido = true,
+                            DataDevolucao = DateTime.Now
+                        };
+                        db.Emprestimos.Update(emp);
+                        db.SaveChanges();
+                        ListarEmprestados();
+                    }
+                }
+            }
+            else
+            {
+                MessageDialog dialog = new MessageDialog("O objeto já foi devolvido!");
+                await dialog.ShowAsync();
+            }
         }
 
         private void btnInserirCont_Click(object sender, RoutedEventArgs e)

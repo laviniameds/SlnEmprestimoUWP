@@ -8,8 +8,8 @@ using EmprestimoUWP.Models;
 namespace EmprestimoUWP.Migrations
 {
     [DbContext(typeof(AppEmprestimo))]
-    [Migration("20161130154903_AppEmprest2")]
-    partial class AppEmprest2
+    [Migration("20161130180305_AppEmprestimo2")]
+    partial class AppEmprestimo2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,8 @@ namespace EmprestimoUWP.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ContatoId");
+
+                    b.Property<DateTime>("DataDevolucao");
 
                     b.Property<DateTime>("DataEmprestimo");
 

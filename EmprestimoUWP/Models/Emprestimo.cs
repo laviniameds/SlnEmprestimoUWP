@@ -15,5 +15,6 @@ namespace EmprestimoUWP.Models
         public DateTime DataEmprestimo { get; set; }
         public DateTime DataPrevDev { get; set; }
         public bool Devolvido { get; set; }
+        public DateTime DataDevolucao { get; set; }
     }
 }

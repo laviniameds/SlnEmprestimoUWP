@@ -38,6 +38,8 @@ namespace EmprestimoUWP.Migrations
 
                     b.Property<int?>("ContatoId");
 
+                    b.Property<DateTime>("DataDevolucao");
+
                     b.Property<DateTime>("DataEmprestimo");
 
                     b.Property<DateTime>("DataPrevDev");

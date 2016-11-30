@@ -30,16 +30,24 @@
                             <DataTemplate>
                                 <StackPanel>
                                     <TextBlock FontSize="12">
+                                        <Run FontWeight="Bold" Text="Objeto: " />
                                         <Run Text="{Binding Descricao}" />
-                                        <Run Text=" - " /> 
-                                        <Run Text="{Binding Contato.Nome}" />
-                                        <Run Text=" - " /> 
+                                        <LineBreak/>
+                                        <Run FontWeight="Bold" Text="Data Empréstimo: " /> 
                                         <Run Text="{Binding DataEmprestimo}" />
-                                        <Run Text="\n" />  
-                                        <Run Text="{Binding DataDevolucao}" />
-                                        <Run Text=" - Devolvido: " /> 
+                                        <LineBreak/> 
+                                        <Run FontWeight="Bold" Text="Data previsão da devolução: " /> 
+                                        <Run Text="{Binding DataPrevDev}" />
+                                        <LineBreak/> 
+                                        <Run FontWeight="Bold" Text="Devolvido: " /> 
                                         <Run Text="{Binding Devolvido}" />
-                                        <Run Text="\n" /> 
+                                        <LineBreak/>
+                                        <Run FontWeight="Bold" Text="Data Devolução: " />
+                                        <Run Text="{Binding DataDevolucao}" />
+                                        <LineBreak/>
+                                        <Run FontWeight="Bold" Text="Contato: " />
+                                        <Run Text="{Binding Contato.Nome}" />
+                                        <LineBreak/>
                                         <Run Text="{Binding Contato.Email}" />
                                         <Run Text=" - " />
                                         <Run Text="{Binding Contato.Telefone}" />
