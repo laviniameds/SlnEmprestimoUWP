@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EmprestimoUWP.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +32,7 @@ namespace EmprestimoUWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            using (var db = new AppEmprestimo()) {db.Database.Migrate();}
         }
 
         /// <summary>

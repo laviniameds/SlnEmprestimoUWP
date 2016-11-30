@@ -89,6 +89,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="App.config" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,12 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20161130005524_EmprestimoMigration.cs" />
+    <Compile Include="Migrations\20161130005524_EmprestimoMigration.designer.cs">
+      <DependentUpon>20161130005524_EmprestimoMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AppEmprestimoModelSnapshot.cs" />
+    <Compile Include="Models\AppEmprestimo.cs" />
     <Compile Include="Models\Contato.cs" />
     <Compile Include="Models\Emprestimo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

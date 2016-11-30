@@ -82,13 +82,11 @@
             </PivotItem>
             <PivotItem Header="Editar Contato" IsEnabled="False">
                 <Grid>
-                    
                     <TextBox x:Name="txtEditNome" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Nome" VerticalAlignment="Top" Width="316"/>
                     <TextBox x:Name="txtEditEmail" HorizontalAlignment="Left" Margin="10,47,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="316"/>
                     <TextBox x:Name="txtEditTel" HorizontalAlignment="Left" Margin="10,84,0,0" TextWrapping="Wrap" Text="Telefone" VerticalAlignment="Top" Width="168"/>
                     <Button x:Name="btnEditCont" Content="Atualizar" HorizontalAlignment="Left" Margin="183,84,0,0" VerticalAlignment="Top" Width="143" Click="btnEditCont_Click"/>
-                    
-                 </Grid>
+                </Grid>
             </PivotItem>
         </Pivot>
     </Grid>
