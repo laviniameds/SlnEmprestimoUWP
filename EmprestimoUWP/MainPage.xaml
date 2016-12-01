@@ -57,7 +57,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                     <Button x:Name="btnDevolvido" Content="Devolvido" HorizontalAlignment="Left" Margin="188,10,0,0" VerticalAlignment="Top" Click="btnDevolvido_Click"/>
-                    <Button x:Name="btnNDevolvido" Content="Xexado" HorizontalAlignment="Left" Margin="58,10,0,0" VerticalAlignment="Top" Click="btnNDevolvido_Click"/>
+                    <Button x:Name="btnNDevolvido" Content="Não Devolvido" HorizontalAlignment="Left" Margin="38,10,0,0" VerticalAlignment="Top" Click="btnNDevolvido_Click"/>
                 </Grid>
             </PivotItem>
             <PivotItem Header="Inserir Contato">

@@ -1,19 +1,11 @@
 ﻿using EmprestimoUWP.Models;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.ApplicationModel.Email;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using LightBuzz.SMTP;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -112,9 +104,37 @@ namespace EmprestimoUWP
             }
         }
 
-        private void btnNDevolvido_Click(object sender, RoutedEventArgs e)
+        private async void btnNDevolvido_Click(object sender, RoutedEventArgs e)
         {
-
+            Emprestimo obj = (Emprestimo)lvEmprestados.SelectedItem;
+            if (obj.Devolvido == false)
+            {
+                if (DateTime.Now > obj.DataPrevDev)
+                {
+                    SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587, false, "medeiroslavinia@hotmail.com", "UWPassword");
+                    EmailMessage emailMessage = new EmailMessage();
+                    emailMessage.To.Add(new EmailRecipient(obj.Contato.Email.ToString()));
+                    emailMessage.Subject = "A gente não esqueceu!";
+                    emailMessage.Sender.Name = "AppEmprestimo";
+                    emailMessage.Body = "Ei, " + obj.Contato.Nome + "Devolva o(a) " + obj.Descricao + " do(a) coleguinha! Paliaço.";
+                    await client.SendMail(emailMessage);
+                    MessageDialog dialog = new MessageDialog(
+                        "Email enviado para esse ser humano que não te devolveu o(a) " +
+                        obj.Descricao + "!"
+                        );
+                    await dialog.ShowAsync();
+                }
+                else
+                {
+                    MessageDialog dialog = new MessageDialog("O prazo para entrega ainda não foi atingido!");
+                    await dialog.ShowAsync();
+                }
+            }
+            else
+            {
+                MessageDialog dialog = new MessageDialog("O objeto já foi devolvido!");
+                await dialog.ShowAsync();
+            }
         }
 
         private async void btnDevolvido_Click(object sender, RoutedEventArgs e)
@@ -217,6 +237,7 @@ namespace EmprestimoUWP
             db.Contatos.Update(c);
             db.SaveChanges();
             ListarContatos();
+            ListarEmprestados();
 
             txtEditNome.Text = "";
             txtEditEmail.Text = "";
