@@ -7,6 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using LightBuzz.SMTP;
 
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace EmprestimoUWP
@@ -36,6 +37,17 @@ namespace EmprestimoUWP
             }
         }
 
+        private void PopularCB()
+        {
+            AppEmprestimo db = new AppEmprestimo();
+            if (db.Contatos.Count() != 0)
+            {
+                cbContato.ItemsSource = db.Contatos.ToList();
+                cbContato.SelectedValuePath = "Id";
+                cbContato.DisplayMemberPath = "Nome";
+            }
+        }
+
         private void ListarEmprestados()
         {
             AppEmprestimo db = new AppEmprestimo();
@@ -49,17 +61,6 @@ namespace EmprestimoUWP
                 }
                 db.SaveChanges();
                 lvEmprestados.ItemsSource = db.Emprestimos.ToList();
-            }
-        }
-
-        private void PopularCB()
-        {
-            AppEmprestimo db = new AppEmprestimo();
-            if (db.Contatos.Count() != 0)
-            {
-                cbContato.ItemsSource = db.Contatos.ToList();
-                cbContato.SelectedValuePath = "Id";
-                cbContato.DisplayMemberPath = "Nome";
             }
         }
 
@@ -111,17 +112,14 @@ namespace EmprestimoUWP
             {
                 if (DateTime.Now > obj.DataPrevDev)
                 {
-                    SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587, false, "medeiroslavinia@hotmail.com", "UWPassword");
+                    SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587, false, "", "");
                     EmailMessage emailMessage = new EmailMessage();
                     emailMessage.To.Add(new EmailRecipient(obj.Contato.Email.ToString()));
                     emailMessage.Subject = "A gente não esqueceu!";
                     emailMessage.Sender.Name = "AppEmprestimo";
-                    emailMessage.Body = "Ei, " + obj.Contato.Nome + "Devolva o(a) " + obj.Descricao + " do(a) coleguinha! Paliaço.";
+                    emailMessage.Body = "Ei, " + obj.Contato.Nome + "! Devolva o(a) " + obj.Descricao + " do(a) coleguinha! Paliaço.";
                     await client.SendMail(emailMessage);
-                    MessageDialog dialog = new MessageDialog(
-                        "Email enviado para esse ser humano que não te devolveu o(a) " +
-                        obj.Descricao + "!"
-                        );
+                    MessageDialog dialog = new MessageDialog("Email enviado para esse ser humano que não te devolveu o(a) " + obj.Descricao + "!");
                     await dialog.ShowAsync();
                 }
                 else
@@ -220,6 +218,7 @@ namespace EmprestimoUWP
             db.Contatos.Remove(obj);
             db.SaveChanges();
             ListarContatos();
+            PopularCB();
         }
 
         private void btnEditCont_Click(object sender, RoutedEventArgs e)
